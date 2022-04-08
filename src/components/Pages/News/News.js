@@ -35,7 +35,7 @@ function News() {
         <div className="container">
             <Posts posts={currentPosts} />
             <Pagination 
-            postsPerPage = {setPostsPerPage} 
+            postsPerPage = {postsPerPage} 
             totalPosts = {posts.length}
             paginate = {paginate}
             />
