@@ -1,5 +1,5 @@
 import React from 'react'
-// import { motion } from "framer-motion"
+import { motion } from "framer-motion"
 
 import {FaHtml5, FaCss3Alt, FaSass, FaReact} from "react-icons/fa"
 import {SiJavascript} from "react-icons/si"
@@ -11,13 +11,79 @@ import pic3 from "../../../images/sweet.jpg"
 import "./About.scss"
 
 function About() {
+
+  const h3Variants = {
+    hidden: {
+       x: -1000,
+       opacity: 0,
+    },
+    visible: {
+        x: 0,
+        opacity: 1,
+    },
+  };
+
+  const h1Variants = {
+    hidden: {
+      y: 3000,
+      opacity: 0,
+    },
+    visible: {
+      y: 0,
+      opacity: 1,
+    },
+  };
+
+  const worksItems = [
+    {
+      title: "Flower Shop",
+      imgUrl: pic1,
+    },
+    {
+      title: "Yoga Studio",
+      imgUrl: pic2,
+    },
+    {
+      title: "Candy Shop",
+      imgUrl: pic3,
+    },
+  ];
+
+  const worksVariants = {
+    visible: (idx) => ({
+      opacity: 1,
+      transition: {
+        delay: idx * 0.8,
+      },
+    }),
+    hidden: {
+      opacity: 0,
+    },
+  };
+
   return (
     <section className="about">
       <div className="container">
 
-        <h1 className='about__title'>Lifestyle Designer</h1>
-        <h2>This is Page About Our Company</h2>
-        <h3> To create your site we use</h3>
+        <motion.h1 className='about__title'
+        variants = {h1Variants}
+        initial={"hidden"}
+        animate={"visible"}
+        transition = {{
+           duration: 3,
+        }}
+        >Lifestyle Designer</motion.h1> 
+
+        <h2>This is Page About Our Company</h2> 
+
+        <motion.h3 
+         variants={h3Variants}
+         initial={"hidden"}
+         animate={"visible"}
+         transition = {{
+            duration: 2,
+          }}
+        >To create your site we use</motion.h3>
 
         <ul className="skills">
           <li className="skills__item"><FaHtml5/> HTML</li>
@@ -33,18 +99,19 @@ function About() {
         <div className="works">
 
           <ul className="works__list">
-            <li className="works__item">
-              <img src={pic1} alt="flower-pic" className="works__pic" />
-              <h4>Flower Shop</h4>
-            </li>
-            <li className="works__item">
-              <img src={pic2} alt="yoga.pic" className="works__pic" />
-              <h4>Yoga Studio</h4>
-            </li>
-            <li className="works__item">
-              <img src={pic3} alt="sweet-pic" className="works__pic"  />
-              <h4>Candy Shop</h4>
-            </li>
+            {worksItems.map((work, idx) => (
+              <motion.li className="works__item"
+              variants={worksVariants}
+              initial={"hidden"}
+              animate={"visible"}
+              key={idx}
+              custom={idx}
+              >
+              <img src={work.imgUrl} alt="" className="works__pic" />
+              <h4>{work.title}</h4>
+            </motion.li>
+            ))}
+
           </ul>
 
         </div>
